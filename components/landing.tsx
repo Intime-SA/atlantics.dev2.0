@@ -183,7 +183,7 @@ const PROJECTS: Project[] = [
     description:
       "Plataforma de casino online y juegos: integración con providers, wallet en tiempo real, KYC, antifraude y panel de operaciones 24/7.",
     url: "https://masterbet.club",
-    image: "/images/kaury-orders.png",
+    image: "/images/masterbet.png",
     stack: ["Next.js", "Node.js", "Redis", "WebSockets", "Provider APIs"],
     outcomes: [
       "Latencia < 80ms en wallet",
