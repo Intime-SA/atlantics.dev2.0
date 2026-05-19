@@ -500,7 +500,7 @@ const AtlanticsLogo: React.FC<{ className?: string }> = ({ className = "size-7" 
   </svg>
 );
 
-/* LogoMark — usa /atlantics.png; cae al SVG si no carga */
+/* LogoMark — usa /transparentatlantic.png; cae al SVG si no carga */
 const LogoMark: React.FC<{ size?: "sm" | "md" | "lg" }> = ({ size = "sm" }) => {
   const sz =
     size === "lg" ? "h-10 w-14" : size === "md" ? "h-8 w-11" : "h-7 w-10";
@@ -509,7 +509,7 @@ const LogoMark: React.FC<{ size?: "sm" | "md" | "lg" }> = ({ size = "sm" }) => {
     <span className={`relative inline-block ${sz}`}>
       {!imgError && (
         <img
-          src="/atlantics.png"
+          src="/transparentatlantic.png"
           alt="Atlantics"
           className="size-full object-contain"
           onError={() => setImgError(true)}
@@ -546,7 +546,7 @@ const Hero: React.FC = () => {
         />
         {/* Logo watermark detrás del hero */}
         <img
-          src="/atlantics.png"
+          src="/transparentatlantic.png"
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute left-1/2 top-[58%] w-[900px] max-w-[140vw] -translate-x-1/2 -translate-y-1/2 opacity-[0.05] select-none"
@@ -777,10 +777,10 @@ const ProjectCard: React.FC<{ project: Project; index: number; total: number }> 
       >
         <motion.article
           style={{ scale, opacity: opacityOut }}
-          className="mx-auto mt-8 grid w-full max-w-6xl grid-cols-1 overflow-hidden rounded-3xl border border-white/[0.08] bg-[#0F0F12]/95 shadow-[0_24px_80px_-20px_rgba(0,0,0,0.6)] backdrop-blur md:grid-cols-12"
+          className="mx-auto mt-8 grid w-full max-w-7xl grid-cols-1 overflow-hidden rounded-3xl border border-white/[0.08] bg-[#0F0F12]/95 shadow-[0_24px_80px_-20px_rgba(0,0,0,0.6)] backdrop-blur md:grid-cols-12"
         >
           {/* Left: copy */}
-          <div className="flex flex-col justify-between gap-8 p-8 md:col-span-7 md:p-12">
+          <div className="flex flex-col justify-between gap-8 p-8 md:col-span-5 md:p-12">
             <div>
               <div className="flex items-center gap-3">
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[11px] font-medium uppercase tracking-[0.16em] text-white/60">
@@ -842,25 +842,11 @@ const ProjectCard: React.FC<{ project: Project; index: number; total: number }> 
           </div>
 
           {/* Right: visual */}
-          <div className="relative md:col-span-5">
+          <div className="relative md:col-span-7">
             <div
-              className={`relative h-64 w-full overflow-hidden bg-gradient-to-br ${project.accent} md:h-full`}
+              className={`relative h-80 w-full overflow-hidden bg-gradient-to-br ${project.accent} md:h-full md:min-h-[520px]`}
             >
-              {/* Imagen real del proyecto (si existe) */}
-              {project.image && (
-                <img
-                  src={project.image}
-                  alt={project.name}
-                  loading="lazy"
-                  className="absolute inset-0 size-full object-cover"
-                  onError={(e) => {
-                    (e.currentTarget as HTMLImageElement).style.display = "none";
-                  }}
-                />
-              )}
-
-              {/* Vignette + grid overlay (sobre imagen o sobre gradient) */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              {/* Grid overlay sutil sobre el gradient */}
               <div
                 className="absolute inset-0 opacity-20 mix-blend-overlay"
                 style={{
@@ -869,6 +855,21 @@ const ProjectCard: React.FC<{ project: Project; index: number; total: number }> 
                   backgroundSize: "32px 32px",
                 }}
               />
+
+              {/* Imagen real del proyecto (si existe) — contenida completa */}
+              {project.image && (
+                <div className="absolute inset-0 flex items-center justify-center p-6 pb-20 md:p-10 md:pb-24">
+                  <img
+                    src={project.image}
+                    alt={project.name}
+                    loading="lazy"
+                    className="max-h-full max-w-full object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.45)]"
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).style.display = "none";
+                    }}
+                  />
+                </div>
+              )}
 
               {/* Fallback icon (solo si no hay imagen) */}
               {!project.image && (
